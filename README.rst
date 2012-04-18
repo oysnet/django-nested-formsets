@@ -6,16 +6,15 @@ models.py
     
     class Group(models.Model):
         editorial = models.ForeignKey(Editorial)
-        title = ...
     
     class Link(models.Model):
         group = models.ForeignKey(Group)
-        url = ...
         
 
 forms.py
     
     from nested_formsets.formsets import NestedInlineFormSet
+    
     from nested_formsets.forms import NestedModelForm
         
     class GroupInlineFormSet(NestedInlineFormSet, BaseModelFormSet):
@@ -33,7 +32,9 @@ admin.py
     
     class GroupLinkInline(StackedInline):
         model = Group
+        
         form = GroupForm
+        
         formset = GroupInlineFormSet
         
     
