@@ -1,5 +1,5 @@
     
-models.py
+models.py::
     
     class Editorial(models.Model)
         ...
@@ -11,32 +11,26 @@ models.py
         group = models.ForeignKey(Group)
         
 
-forms.py
+forms.py::
     
     from nested_formsets.formsets import NestedInlineFormSet
-    
     from nested_formsets.forms import NestedModelForm
         
     class GroupInlineFormSet(NestedInlineFormSet, BaseModelFormSet):
         pass
 
     class GroupForm(NestedModelForm, forms.ModelForm):
-    
         nested_formset_class = inlineformset_factory(Group, Link)
-        
         class Meta:
             model = Group
             
             
-admin.py
+admin.py::
     
     class GroupLinkInline(StackedInline):
         model = Group
-        
         form = GroupForm
-        
         formset = GroupInlineFormSet
-        
     
     class EditorialAdmin(admin.ModelAdmin):
         inlines = (GroupInline,)
